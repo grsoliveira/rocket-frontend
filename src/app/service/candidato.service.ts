@@ -12,13 +12,7 @@ export class CandidatoService {
   constructor(private http: HttpClient) { }
 
   public cadastrarCandidato(dados: any) {
-
-    console.log(dados);
-
     return this.http.post(this.API + '/candidato', dados);
-    // return this.http.request('POST', this.API + '/candidato', {
-    //   body: dados
-    // });
   }
 
   public consultarCandidatos(cpf: string, senha: string) {
