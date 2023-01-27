@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="card mt-5" style="padding: 20px;">
+    <form #cadastroCandidatoForm="ngForm" (ngSubmit)="cadastro(cadastroCandidatoForm)" enctype="multipart/form-data">
+      <div class="form-group" >
+        <label for="nome">Nome:</label>
+        <input type="text" #nomeCompleto (ngModel)="nomeCompleto" name="nomeCompleto" id="nomeCompleto" class="form-control" placeholder="Nome completo">
+      </div>
+
+      <div class="form-group" >
+        <label for="nome">Nascimento:</label>
+        <input type="text  | date:'yyyy-MM-dd'" #nascimento (ngModel)="nascimento" name="nascimento" id="nascimento" class="form-control" placeholder="Data de Nascimento">
+      </div>
+
+      <div class="form-group" >
+        <label for="nome">CPF:</label>
+        <input type="text" #cpf (ngModel)="cpf" name="cpf" id="cpf" class="form-control" placeholder="CPF">
+      </div>
+
+      <div class="form-group" >
+        <label for="nome">Senha:</label>
+        <input type="text" #senha (ngModel)="senha" name="senha" id="senha" class="form-control" placeholder="Senha">
+      </div>
+
+      <div class="form-group" >
+        <label for="nome">Nome da mãe:</label>
+        <input type="text" #nomeCompletoDaMae (ngModel)="nomeCompletoDaMae" name="nomeCompletoDaMae" id="nomeCompletoDaMae" class="form-control" placeholder="Nome completo da Mãe">
+      </div>
+
+      <div class="form-group" >
+        <label for="nome">Foto:</label>
+        <input type="file" #foto (ngModel)="foto" name="foto" id="foto" class="form-control" (change)="changeFoto($event)" >
+      </div>
+
+      <div class="form-group" >
+        <label for="nome">Documento:</label>
+        <input type="file" #documento (ngModel)="documento" name="documento" id="documento" class="form-control" (change)="changeDocumento($event)" >
+      </div>
+
+      <div class="form-group" >
+        <label for="nome">Comprovante:</label>
+        <input type="file" #comprovante (ngModel)="comprovante" name="comprovante" id="comprovante" class="form-control" (change)="changeComprovante($event)" >
+      </div>
+
+      <div class="form-group" >
+        <input type="submit" value="Cadastrar" class="btn btn-primary w-100">
+      </div>
+    </form>
+  </div>
+</div>
