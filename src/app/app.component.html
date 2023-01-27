@@ -3,7 +3,9 @@
     <div class="container-fluid">
       <a class="navbar-brand" routerLink="/cadastro" >Cadastro de Candidatos</a>
       <a class="navbar-brand" routerLink="/consulta" >Consulta de Inscrição</a>
-      <a class="navbar-brand" routerLink="/login">Área Restrita</a>
+      <a class="navbar-brand" routerLink="/candidatos" *ngIf="loginService.isAuthenticated()">Lista de Candidatos</a>
+      <a class="navbar-brand" routerLink="/login" *ngIf="!loginService.isAuthenticated()">Área Restrita</a>
+      <a class="navbar-brand" (click)="deslogar()" *ngIf="loginService.isAuthenticated()">Sair</a>
     </div>
   </div>
 </div>

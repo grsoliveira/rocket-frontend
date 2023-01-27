@@ -23,7 +23,12 @@
       <h5 class="card-title">{{candidato.nomeCompleto}}</h5>
     </div>
     <div class="card-header">
-      Situação: {{candidato.situacao}}
+      <div *ngIf="candidato.aprovado != null">
+        Situação: {{candidato.aprovado ? 'Aprovado' : 'Reprovado'}}
+      </div>
+      <div *ngIf="candidato.aprovado == null">
+        Situação: [Não avaliado]
+      </div>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">Nascimento: {{candidato.nascimento | date: 'shortDate'}}</li>

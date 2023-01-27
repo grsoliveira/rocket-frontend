@@ -3,12 +3,12 @@
     <form #formLogin="ngForm" (ngSubmit)="fazerLogin(formLogin)">
       <div class="form-group" >
         <label for="nome">Login:</label>
-        <input type="text" #login (ngModel)="login" name="login" id="login" class="form-control" placeholder="Login">
+        <input type="text" #username (ngModel)="username" name="username" id="username" class="form-control" placeholder="Login">
       </div>
 
       <div class="form-group" >
         <label for="senha">Senha:</label>
-        <input type="password" #senha (ngModel)="senha" name="senha" id="senha" class="form-control">
+        <input type="password" #password (ngModel)="password" name="password" id="password" class="form-control">
       </div>
 
       <div class="form-group" >

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { Candidato } from '../model/candidato.model';
 import { CandidatoService } from '../service/candidato.service';
 
 @Component({
@@ -11,7 +12,7 @@ import { CandidatoService } from '../service/candidato.service';
 })
 export class ConsultaCandidatoComponent implements OnInit {
 
-  candidato: any = null;
+  candidato: Candidato | undefined;
   foto: SafeResourceUrl = '';
   documento: SafeResourceUrl = '';
   comprovante: SafeResourceUrl = '';
@@ -21,7 +22,7 @@ export class ConsultaCandidatoComponent implements OnInit {
     private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
-    this.candidato = null;
+    this.candidato = undefined;
   }
 
   consulta(consultaCandidatoForm: NgForm) {

@@ -8,9 +8,11 @@ import { CadastroCandidatoComponent } from './cadastro-candidato/cadastro-candid
 import { ConsultaCandidatoComponent } from './consulta-candidato/consulta-candidato.component';
 import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { LoginComponent } from './login/login.component';
 import { CandidatosComponent } from './candidatos/candidatos.component';
+import { TokenInterceptor } from './token.interceptor';
+import { AdministrarCandidadoComponent } from './administrar-candidado/administrar-candidado.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +21,8 @@ import { CandidatosComponent } from './candidatos/candidatos.component';
     ConsultaCandidatoComponent,
     HomeComponent,
     LoginComponent,
-    CandidatosComponent
+    CandidatosComponent,
+    AdministrarCandidadoComponent
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,13 @@ import { CandidatosComponent } from './candidatos/candidatos.component';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptor,
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

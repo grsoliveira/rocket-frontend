@@ -1,5 +1,6 @@
 import { registerLocaleData } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { Route, Router } from '@angular/router';
 import { CandidatoService } from '../service/candidato.service';
 
@@ -20,7 +21,7 @@ export class CadastroCandidatoComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  cadastro(cadastroCandidatoForm: any) {
+  cadastro(cadastroCandidatoForm: NgForm) {
 
     cadastroCandidatoForm.value.foto = this.fotoProcessada;
     cadastroCandidatoForm.value.documento = this.documentoProcessado;

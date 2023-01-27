@@ -1,0 +1,44 @@
+<div class="card" *ngIf="candidato != null">
+  <img class="card-img-top" [src]="foto" alt="Foto">
+  <div class="card-body">
+    <h5 class="card-title">{{candidato.nomeCompleto}}</h5>
+  </div>
+  <div class="card-header">
+    <div *ngIf="candidato.aprovado != null">
+      Situação: {{candidato.aprovado ? 'Aprovado' : 'Reprovado'}}
+    </div>
+    <div *ngIf="candidato.aprovado == null">
+      Situação: [Não avaliado]
+    </div>
+  </div>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item">Nascimento: {{candidato.nascimento | date: 'shortDate'}}</li>
+    <li class="list-group-item">CPF: {{candidato.cpf}}</li>
+    <li class="list-group-item">Nome da Mãe: {{candidato.nomeCompletoDaMae}}</li>
+  </ul>
+
+  <div class="form-group">
+    <label>Documento:</label>
+    <img [src]="documento" style="width: 50em;">
+  </div>
+  <div class="form-group">
+    <label>Comprovante:</label>
+    <img [src]="comprovante" style="width: 50em;">
+  </div>
+
+
+  <table class="table mt-5">
+    <tr >
+      <th>
+        <a routerLink="/candidatos">Voltar</a>
+      </th>
+      <td>
+        <button type="button" class="btn btn-primary" (click)="aprovar()">Aprovar</button>
+      </td>
+      <td>
+        <button type="button" class="btn btn-danger" (click)="reprovar()">Reprovar</button>
+      </td>
+    </tr>
+  </table>
+
+  </div>

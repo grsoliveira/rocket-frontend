@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginComponent } from './login/login.component';
+import { LoginService } from './service/login.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +9,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'rocket-frontend';
+
+  constructor(public loginService: LoginService) {
+  }
+
+  deslogar() {
+    this.loginService.logout();
+
+  }
 }
