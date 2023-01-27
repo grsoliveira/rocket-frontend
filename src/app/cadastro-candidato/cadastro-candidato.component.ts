@@ -10,38 +10,21 @@ import { CandidatoService } from '../service/candidato.service';
 })
 export class CadastroCandidatoComponent implements OnInit {
 
-  foto: File | undefined;
-  documento: File | undefined;
-  comprovante: File | undefined;
+  fotoProcessada: string | ArrayBuffer | null = null;
+  documentoProcessado: string | ArrayBuffer | null = null;
+  comprovanteProcessado: string | ArrayBuffer | null = null;
 
   constructor(private candidatoService: CandidatoService,
               private router: Router) { }
 
   ngOnInit(): void {
-    this.foto = undefined;
-    this.documento = undefined;
-    this.comprovante = undefined;
   }
 
   cadastro(cadastroCandidatoForm: any) {
 
-    if (this.foto) {
-      const readerFoto = new FileReader();
-      readerFoto.readAsDataURL(this.foto!);
-      readerFoto.onload = () => { cadastroCandidatoForm.value.foto = readerFoto.result; };
-    }
-
-    if (this.documento) {
-      const readerDocumento = new FileReader();
-      readerDocumento.readAsDataURL(this.documento!);
-      readerDocumento.onload = () => { cadastroCandidatoForm.value.documento = readerDocumento.result; };
-    }
-
-    if (this.comprovante) {
-      const readerComprovante = new FileReader();
-      readerComprovante.readAsDataURL(this.comprovante!);
-      readerComprovante.onload = () => { cadastroCandidatoForm.value.comprovante = readerComprovante.result; };
-    }
+    cadastroCandidatoForm.value.foto = this.fotoProcessada;
+    cadastroCandidatoForm.value.documento = this.documentoProcessado;
+    cadastroCandidatoForm.value.comprovante = this.comprovanteProcessado;
 
     this.candidatoService.cadastrarCandidato(cadastroCandidatoForm.value).subscribe((resp) => {
       console.log(resp);
@@ -54,19 +37,31 @@ export class CadastroCandidatoComponent implements OnInit {
 
   changeFoto(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.foto = event.target.files[0];
+      const foto = event.target.files[0];
+
+      const readerFoto = new FileReader();
+      readerFoto.readAsDataURL(foto!);
+      readerFoto.onload = () => { this.fotoProcessada = readerFoto.result; };
     }
   }
 
   changeDocumento(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.documento = event.target.files[0];
+      const documento = event.target.files[0];
+
+      const readerDocumento = new FileReader();
+      readerDocumento.readAsDataURL(documento!);
+      readerDocumento.onload = () => { this.documentoProcessado = readerDocumento.result; };
     }
   }
 
   changeComprovante(event: any) {
     if (event.target.files && event.target.files[0]) {
-      this.comprovante = event.target.files[0];
+      const comprovante = event.target.files[0];
+
+      const readerComprovante = new FileReader();
+      readerComprovante.readAsDataURL(comprovante!);
+      readerComprovante.onload = () => { this.comprovanteProcessado = readerComprovante.result; };
     }
   }
 
