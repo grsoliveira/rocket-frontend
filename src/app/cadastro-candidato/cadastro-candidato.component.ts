@@ -25,17 +25,23 @@ export class CadastroCandidatoComponent implements OnInit {
 
   cadastro(cadastroCandidatoForm: any) {
 
-    const readerFoto = new FileReader();
-    readerFoto.readAsDataURL(this.foto!);
-    readerFoto.onload = () => { cadastroCandidatoForm.value.foto = readerFoto.result; };
+    if (this.foto) {
+      const readerFoto = new FileReader();
+      readerFoto.readAsDataURL(this.foto!);
+      readerFoto.onload = () => { cadastroCandidatoForm.value.foto = readerFoto.result; };
+    }
 
-    const readerDocumento = new FileReader();
-    readerDocumento.readAsDataURL(this.documento!);
-    readerDocumento.onload = () => { cadastroCandidatoForm.value.documento = readerDocumento.result; };
+    if (this.documento) {
+      const readerDocumento = new FileReader();
+      readerDocumento.readAsDataURL(this.documento!);
+      readerDocumento.onload = () => { cadastroCandidatoForm.value.documento = readerDocumento.result; };
+    }
 
-    const readerComprovante = new FileReader();
-    readerComprovante.readAsDataURL(this.comprovante!);
-    readerComprovante.onload = () => { cadastroCandidatoForm.value.comprovante = readerComprovante.result; };
+    if (this.comprovante) {
+      const readerComprovante = new FileReader();
+      readerComprovante.readAsDataURL(this.comprovante!);
+      readerComprovante.onload = () => { cadastroCandidatoForm.value.comprovante = readerComprovante.result; };
+    }
 
     this.candidatoService.cadastrarCandidato(cadastroCandidatoForm.value).subscribe((resp) => {
       console.log(resp);
