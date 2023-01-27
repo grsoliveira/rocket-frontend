@@ -28,7 +28,6 @@ export class ConsultaCandidatoComponent implements OnInit {
   consulta(consultaCandidatoForm: NgForm) {
 
     this.candidatoService.consultarCandidatos(consultaCandidatoForm.value.cpf, consultaCandidatoForm.value.senha).subscribe((resp) => {
-      console.log(resp);
       this.candidato = resp;
       if (this.candidato.foto) {
         this.foto = this.apresentarFoto(this.candidato.foto);
@@ -41,7 +40,7 @@ export class ConsultaCandidatoComponent implements OnInit {
       }
     },
     (err) => {
-      console.log(err);
+      this.candidato = undefined;
     });
   }
 
