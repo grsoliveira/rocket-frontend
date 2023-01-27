@@ -7,7 +7,6 @@
   <table class="table mt-5">
     <thead>
       <tr>
-        <th scope="col">#</th>
         <th scope="col">Nome Completo</th>
         <th scope="col">Nascimento</th>
         <th scope="col">CPF</th>
@@ -18,7 +17,6 @@
     </thead>
     <tbody>
       <tr *ngFor="let ca of candidatos">
-        <th scope="row">1</th>
         <td>{{ca.nomeCompleto}}</td>
         <td>{{ca.nascimento | date: 'shortDate'}}</td>
         <td>{{ca.cpf}}</td>
