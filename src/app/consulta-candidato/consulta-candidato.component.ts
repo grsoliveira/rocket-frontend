@@ -17,6 +17,8 @@ export class ConsultaCandidatoComponent implements OnInit {
   documento: SafeResourceUrl = '';
   comprovante: SafeResourceUrl = '';
 
+  msg: string = '';
+
   constructor(private candidatoService: CandidatoService,
     private router: Router,
     private sanitizer: DomSanitizer) { }
@@ -28,6 +30,7 @@ export class ConsultaCandidatoComponent implements OnInit {
   consulta(consultaCandidatoForm: NgForm) {
 
     this.candidatoService.consultarCandidatos(consultaCandidatoForm.value.cpf, consultaCandidatoForm.value.senha).subscribe((resp) => {
+      this.msg = '';
       this.candidato = resp;
       if (this.candidato.foto) {
         this.foto = this.apresentarFoto(this.candidato.foto);
@@ -41,6 +44,7 @@ export class ConsultaCandidatoComponent implements OnInit {
     },
     (err) => {
       this.candidato = undefined;
+      this.msg = 'Nenhum candidato foi encontrado';
     });
   }
 

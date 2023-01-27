@@ -10,6 +10,8 @@ import { LoginService } from '../service/login.service';
 })
 export class LoginComponent implements OnInit {
 
+  msg: string = '';
+
   constructor(private loginService: LoginService,
     private router: Router) { }
 
@@ -17,8 +19,6 @@ export class LoginComponent implements OnInit {
   }
 
   fazerLogin(formLogin: NgForm) {
-
-    console.log(formLogin);
 
     this.loginService.login(formLogin.value).subscribe(
       data => {
@@ -31,15 +31,10 @@ export class LoginComponent implements OnInit {
           console.error(data);
           console.error("Login error.");
         }
+        this.msg = '';
       },
       error => {
-        console.error("Login error.");
-        console.error(error);
-        if(error.status === 401) {
-          console.log('ERRO 401');
-        } else {
-          console.log('ERRO Service');
-        }
+        this.msg = 'Usuário ou senha inválidos';
       },
     );
   }
