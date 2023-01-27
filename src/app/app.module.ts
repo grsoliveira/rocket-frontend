@@ -13,6 +13,7 @@ import { LoginComponent } from './login/login.component';
 import { CandidatosComponent } from './candidatos/candidatos.component';
 import { TokenInterceptor } from './token.interceptor';
 import { AdministrarCandidadoComponent } from './administrar-candidado/administrar-candidado.component';
+import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { AdministrarCandidadoComponent } from './administrar-candidado/administr
     HttpClientModule
   ],
   providers: [
+    DatePipe,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptor,

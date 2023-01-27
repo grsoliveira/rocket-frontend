@@ -49,13 +49,15 @@ export class AdministrarCandidadoComponent implements OnInit {
 
   aprovar() {
     this.candidatoService.aprovar(this.candidato?.id).subscribe((result) => {
-      this.router.navigateByUrl('/candidatos');
+      // this.router.navigateByUrl('/candidatos');
+      this.router.navigate(['/candidatos', 'Candidato aprovado com sucesso']);
     });
   }
 
   reprovar() {
     this.candidatoService.reprovar(this.candidato?.id).subscribe((result) => {
-      this.router.navigateByUrl('/candidatos');
+      // this.router.navigateByUrl('/candidatos');
+      this.router.navigate(['/candidatos', 'Candidato reprovado com sucesso']);
     });
   }
 }

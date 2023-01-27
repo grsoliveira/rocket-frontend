@@ -1,4 +1,4 @@
-import { registerLocaleData } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Route, Router } from '@angular/router';
@@ -15,25 +15,41 @@ export class CadastroCandidatoComponent implements OnInit {
   documentoProcessado: string | ArrayBuffer | null = null;
   comprovanteProcessado: string | ArrayBuffer | null = null;
 
+  msg: string = '';
+
   constructor(private candidatoService: CandidatoService,
-              private router: Router) { }
+              private router: Router,
+              private datePipe: DatePipe) { }
 
   ngOnInit(): void {
   }
 
   cadastro(cadastroCandidatoForm: NgForm) {
+    this.msg = '';
 
-    cadastroCandidatoForm.value.foto = this.fotoProcessada;
-    cadastroCandidatoForm.value.documento = this.documentoProcessado;
-    cadastroCandidatoForm.value.comprovante = this.comprovanteProcessado;
+    if (!cadastroCandidatoForm.value.senha) {
+      this.msg = 'Campo senha é obrigatório';
 
-    this.candidatoService.cadastrarCandidato(cadastroCandidatoForm.value).subscribe((resp) => {
-      console.log(resp);
-      this.router.navigateByUrl('');
-    },
-    (err) => {
-      console.log(err);
-    });
+    } else {
+
+        try {
+          cadastroCandidatoForm.value.nascimento = this.datePipe.transform(cadastroCandidatoForm.value.nascimento, "yyyy-MM-dd");
+        } catch(err) {
+          this.msg = 'Erro ao converter a data de nascimento';
+        }
+
+        cadastroCandidatoForm.value.foto = this.fotoProcessada;
+        cadastroCandidatoForm.value.documento = this.documentoProcessado;
+        cadastroCandidatoForm.value.comprovante = this.comprovanteProcessado;
+
+        this.candidatoService.cadastrarCandidato(cadastroCandidatoForm.value).subscribe((resp) => {
+          this.router.navigate(['/home', 'Candidato cadatrado com sucesso']);
+        },
+        (err) => {
+          this.msg = 'Erro ao realizar cadastro do candidato';
+        });
+    }
+
   }
 
   changeFoto(event: any) {
@@ -65,7 +81,5 @@ export class CadastroCandidatoComponent implements OnInit {
       readerComprovante.onload = () => { this.comprovanteProcessado = readerComprovante.result; };
     }
   }
-
-
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Candidato } from '../model/candidato.model';
 import { CandidatoService } from '../service/candidato.service';
 
@@ -12,18 +12,27 @@ export class CandidatosComponent implements OnInit {
 
   public candidatos: Candidato[] = [];
 
+  msg: string = '';
+
   constructor(public candidatoService : CandidatoService,
-              public router: Router) { }
+              public router: Router,
+              public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+
+    const mensangem = this.activatedRoute.snapshot.paramMap.get('msg');
+    if (mensangem) {
+      this.msg = mensangem;
+    } else {
+      this.msg = '';
+    }
+
     this.candidatoService.listarCandidatos().subscribe((result) => {
       this.candidatos = result;
-      console.log(this.candidatos);
     });
   }
 
   administrarCandidato(id: number) {
-    console.log('clicou no botao');
     this.router.navigate(['/administrar', id]);
   }
 

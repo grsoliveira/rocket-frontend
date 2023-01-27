@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  msg: string = '';
+
+  constructor(public activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const mensangem = this.activatedRoute.snapshot.paramMap.get('msg');
+    if (mensangem) {
+      this.msg = mensangem;
+    } else {
+      this.msg = '';
+    }
   }
 
 }

@@ -10,10 +10,12 @@ import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
+  {path: 'home/:msg', component: HomeComponent},
   {path: 'cadastro', component: CadastroCandidatoComponent},
   {path: 'consulta', component: ConsultaCandidatoComponent},
   {path: 'login', component: LoginComponent},
   {path: 'candidatos', component: CandidatosComponent, canActivate: [AuthGuard]},
+  {path: 'candidatos/:msg', component: CandidatosComponent, canActivate: [AuthGuard]},
   {path: 'administrar/:id', component: AdministrarCandidadoComponent, canActivate: [AuthGuard]}
 ];
 
